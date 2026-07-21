@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P-Locker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 340px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      background: #0f0f1a;
+      color: #e0e0e0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid #2a2a4a;
+      background: #141426;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #00d4aa;
+    }
+    .logo::before { content: '🔒'; font-size: 16px; }
+    .picker-btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .picker-btn.active {
+      background: #00d4aa;
+      color: #0f0f1a;
+    }
+    .picker-btn:not(.active) {
+      background: #2a2a4a;
+      color: #e0e0e0;
+    }
+    .picker-btn:not(.active):hover { background: #3a3a5a; }
+    .domain {
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #888;
+      border-bottom: 1px solid #2a2a4a;
+      background: #141426;
+    }
+    .domain span { color: #00d4aa; font-weight: 500; }
+    .list { max-height: 380px; overflow-y: auto; padding: 8px; }
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: 12px;
+    }
+    .empty::before { content: '🔍'; display: block; font-size: 32px; margin-bottom: 8px; opacity: 0.3; }
+    .block-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: #141426;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    .block-item:hover { border-color: #00d4aa; }
+    .block-info { flex: 1; min-width: 0; }
+    .block-selector {
+      font-family: Monaco, Menlo, monospace;
+      font-size: 10px;
+      color: #00d4aa;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .block-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 10px;
+      color: #888;
+    }
+    .block-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      background: #2a2a4a;
+      border-radius: 3px;
+      font-size: 9px;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+    .unblock-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 6px;
+      background: #2a2a4a;
+      color: #ff4757;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .unblock-btn:hover {
+      background: #ff4757;
+      color: white;
+    }
+    .unblock-btn svg { width: 14px; height: 14px; }
+    .footer {
+      padding: 12px 16px;
+      border-top: 1px solid #2a2a4a;
+      background: #141426;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #666;
+    }
+    .footer kbd {
+      background: #2a2a4a;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      color: #00d4aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">P-Locker</div>
+    <button class="picker-btn" id="pickerBtn">Pick Element</button>
+  </div>
+  <div class="domain">Blocking on: <span id="domainName"></span></div>
+  <div class="list" id="blockList">
+    <div class="empty">No blocked elements on this domain</div>
+  </div>
+  <div class="footer">
+    <span>Click <kbd>Esc</kbd> to exit picker mode</span>
+    <span id="count">0 blocked</span>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

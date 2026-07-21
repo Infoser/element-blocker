@@ -1,0 +1,68 @@
+#plocker-hover-overlay {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2147483647;
+  border: 2px dashed #00d4aa;
+  background: rgba(0, 212, 170, 0.12);
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 9999px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(0, 212, 170, 0.3);
+  transition: all 0.05s ease;
+  display: none;
+}
+
+#plocker-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  background: #0f0f1a;
+  color: #00d4aa;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: Monaco, Menlo, Consolas, monospace;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid #00d4aa;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plocker-picker-active {
+  cursor: crosshair !important;
+}
+
+.plocker-picker-active * {
+  cursor: crosshair !important;
+}
+
+[data-plocker-blocked="true"] {
+  outline: 2px solid #ff4757 !important;
+  outline-offset: 2px !important;
+}
+
+.plocker-blocked-transparent {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.plocker-blocked-hidden {
+  display: none !important;
+}
+
+.plocker-notification {
+  animation: plockerSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes plockerSlideIn {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes plockerSlideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100px); opacity: 0; }
+}
